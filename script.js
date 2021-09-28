@@ -21,14 +21,15 @@ const Products = {
       }" class="card-img-top " width="100%" alt="${node.title}" />
       <div class="card-body">
         <h1 class="card-title">${title}</h1>
-        <h5 class="card-price">
+        
+      <div class="tags">
+      ${tags.map((tag) => `<span class="badge bg-primary">${tag}</span>`)}
+      </div>
+       <div class="card-bottom">  
+       <h5 class="card-price">
         $${priceRange?.minVariantPrice?.amount} ${
         priceRange?.minVariantPrice?.currencyCode
       }</h5>
-       <div class="card-bottom">
-       <div class="tags">
-       ${tags.map((tag) => `<span class="badge bg-primary">${tag}</span>`)}
-       </div>
        <div class="btn-container">
        <button class="btn buy-btn">Buy</button>
        <button class="btn cart-btn">Add to cart</button>
@@ -54,9 +55,11 @@ const Products = {
    * Sets up the query string for the GraphQL request
    * @returns {String} A GraphQL query string
    */
+
+  // fetching 8 products.
   query: () => `
     {
-      products(first:3) {
+      products(first:8) { 
         edges {
           node {
             id
